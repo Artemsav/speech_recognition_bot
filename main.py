@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from requests.models import ReadTimeoutError
 from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+from google.cloud import dialogflow
 
 
 logging.basicConfig(
@@ -15,6 +16,50 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
+
+
+def detect_intent_texts(project_id, session_id, texts, language_code):
+    """Returns the result of detect intent with texts as inputs.
+
+    Using the same `session_id` between requests allows continuation
+    of the conversation."""
+
+    session_client = dialogflow.SessionsClient()
+
+    session = session_client.session_path(project_id, session_id)
+    print("Session path: {}\n".format(session))
+
+    for text in texts:
+        text_input = dialogflow.TextInput(text=text, language_code=language_code)
+
+        query_input = dialogflow.QueryInput(text=text_input)
+
+        response = session_client.detect_intent(
+            request={"session": session, "query_input": query_input}
+        )
+
+        print("=" * 20)
+        print("Query text: {}".format(response.query_result.query_text))
+        print(
+            "Detected intent: {} (confidence: {})\n".format(
+                response.query_result.intent.display_name,
+                response.query_result.intent_detection_confidence,
+            )
+        )
+        print("Fulfillment text: {}\n".format(response.query_result.fulfillment_text))
+        return response.query_result.fulfillment_text
+
+
+def implicit():
+    from google.cloud import storage
+
+    # If you don't specify credentials when constructing the client, the
+    # client library will look for credentials in the environment.
+    storage_client = storage.Client()
+
+    # Make an authenticated API request
+    buckets = list(storage_client.list_buckets())
+    print(buckets)
 
 
 def start(update: Update, context: CallbackContext) -> None:
@@ -33,12 +78,27 @@ def help_command(update: Update, context: CallbackContext) -> None:
 
 def echo(update: Update, context: CallbackContext) -> None:
     """Echo the user message."""
-    update.message.reply_text(update.message.text)
+    load_dotenv()
+    rus_language = 'ru'
+    message = [update.message.text]
+    project_id = os.getenv('PROJECT_ID')
+    user_id = os.getenv('USER_ID')
+    answer = detect_intent_texts(
+        project_id=project_id,
+        session_id=user_id,
+        texts=message,
+        language_code=rus_language
+    )
+    update.message.reply_text(answer)
 
 
 def main():
     load_dotenv()
     token = os.getenv('TOKEN_TELEGRAM')
+    rus_language = 'ru'
+    message = ['Привет']
+    project_id = os.getenv('PROJECT_ID')
+    user_id = os.getenv('USER_ID')
     """Start the bot."""
     updater = Updater(token)
     dispatcher = updater.dispatcher

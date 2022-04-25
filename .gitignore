@@ -2,6 +2,7 @@ Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+speech-recognition-9529-4cfc6fe1cb67.json
 # C extensions
 *.so
 
