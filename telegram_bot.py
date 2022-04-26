@@ -99,7 +99,7 @@ def help_command(update: Update, context: CallbackContext) -> None:
     update.message.reply_text('Help!')
 
 
-def handle_status(update: Update, context: CallbackContext) -> None:
+def handle_messages(update: Update, context: CallbackContext) -> None:
     """Handle the answer message from dialogflow the user message."""
     load_dotenv()
     project_id = os.getenv('PROJECT_ID')
@@ -123,7 +123,7 @@ def main():
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("help", help_command))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_status))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_messages))
     updater.start_polling()
     updater.idle()
 

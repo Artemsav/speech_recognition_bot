@@ -48,7 +48,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def echo(event, vk_api, answer):
+def handle_messages(event, vk_api, answer):
     vk_api.messages.send(
         user_id=event.user_id,
         message=answer,
@@ -74,7 +74,7 @@ def main():
                 texts=[event.text],
                 language_code=rus_language
                 )
-            echo(event, vk_api, answer=answer)
+            handle_messages(event, vk_api, answer=answer)
 
 
 if __name__ == '__main__':
