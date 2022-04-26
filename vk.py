@@ -28,7 +28,8 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
         response = session_client.detect_intent(
             request={"session": session, "query_input": query_input}
         )
-
+        if response.query_result.intent.is_fallback:
+            return None
         print("=" * 20)
         print("Query text: {}".format(response.query_result.query_text))
         print(
@@ -74,7 +75,8 @@ def main():
                 texts=[event.text],
                 language_code=rus_language
                 )
-            handle_messages(event, vk_api, answer=answer)
+            if answer:
+                handle_messages(event, vk_api, answer=answer)
 
 
 if __name__ == '__main__':
