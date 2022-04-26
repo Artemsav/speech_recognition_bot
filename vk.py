@@ -1,14 +1,12 @@
-import json
 import logging
 import os
 import random
 
-import requests
-from dotenv import load_dotenv
-from requests.models import ReadTimeoutError
 import vk_api as vk
-from vk_api.longpoll import VkLongPoll, VkEventType
+from dotenv import load_dotenv
 from google.cloud import dialogflow
+from requests.models import ReadTimeoutError
+from vk_api.longpoll import VkEventType, VkLongPoll
 
 
 def detect_intent_texts(project_id, session_id, texts, language_code):
@@ -50,18 +48,18 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def echo(event, vk_api):
+def echo(event, vk_api, answer):
     vk_api.messages.send(
         user_id=event.user_id,
-        message=event.text,
+        message=answer,
         random_id=random.randint(1,1000)
     )
+
 
 def main():
     load_dotenv()
     token = os.getenv('VK_KEY')
     rus_language = 'ru'
-    message = ['Привет']
     project_id = os.getenv('PROJECT_ID')
     user_id = os.getenv('USER_ID')
     """Start the bot."""
@@ -70,9 +68,14 @@ def main():
     longpoll = VkLongPoll(vk_session)
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            echo(event, vk_api)
+            answer = detect_intent_texts(
+                project_id=project_id,
+                session_id=user_id,
+                texts=[event.text],
+                language_code=rus_language
+                )
+            echo(event, vk_api, answer=answer)
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     main()
-    #create_intent()
