@@ -1,9 +1,7 @@
 import json
 import logging
 import os
-import time
 
-import requests
 from dotenv import load_dotenv
 from requests.models import ReadTimeoutError
 from telegram import Update, ForceReply
