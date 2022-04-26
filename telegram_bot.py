@@ -9,8 +9,6 @@ from requests.models import ReadTimeoutError
 from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from google.cloud import dialogflow
-import vk_api
-from vk_api.longpoll import VkLongPoll, VkEventType
 
 
 logging.basicConfig(
@@ -50,18 +48,6 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
         )
         print("Fulfillment text: {}\n".format(response.query_result.fulfillment_text))
         return response.query_result.fulfillment_text
-
-
-def implicit():
-    from google.cloud import storage
-
-    # If you don't specify credentials when constructing the client, the
-    # client library will look for credentials in the environment.
-    storage_client = storage.Client()
-
-    # Make an authenticated API request
-    buckets = list(storage_client.list_buckets())
-    print(buckets)
 
 
 def create_intent():
@@ -113,13 +99,13 @@ def help_command(update: Update, context: CallbackContext) -> None:
     update.message.reply_text('Help!')
 
 
-def echo(update: Update, context: CallbackContext) -> None:
-    """Echo the user message."""
+def handle_status(update: Update, context: CallbackContext) -> None:
+    """Handle the answer message from dialogflow the user message."""
     load_dotenv()
-    rus_language = 'ru'
-    message = [update.message.text]
     project_id = os.getenv('PROJECT_ID')
     user_id = os.getenv('USER_ID')
+    rus_language = 'ru'
+    message = [update.message.text]
     answer = detect_intent_texts(
         project_id=project_id,
         session_id=user_id,
@@ -132,37 +118,15 @@ def echo(update: Update, context: CallbackContext) -> None:
 def main():
     load_dotenv()
     token = os.getenv('TOKEN_TELEGRAM')
-    rus_language = 'ru'
-    message = ['Привет']
-    project_id = os.getenv('PROJECT_ID')
-    user_id = os.getenv('USER_ID')
     """Start the bot."""
     updater = Updater(token)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("help", help_command))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_status))
     updater.start_polling()
     updater.idle()
 
 
-def vk_bot():
-    load_dotenv()
-    token = os.getenv('VK_KEY')
-    vk_session = vk_api.VkApi(token=token)
-
-    longpoll = VkLongPoll(vk_session)
-
-    for event in longpoll.listen():
-        if event.type == VkEventType.MESSAGE_NEW:
-            print('Новое сообщение:')
-            if event.to_me:
-                print('Для меня от: ', event.user_id)
-            else:
-                print('От меня для: ', event.user_id)
-            print('Текст:', event.text)
-
-if __name__=='__main__':
-    #main()
-    #create_intent()
-    vk_bot()
+if __name__ == '__main__':
+    main()
