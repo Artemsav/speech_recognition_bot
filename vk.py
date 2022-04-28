@@ -63,7 +63,7 @@ def handle_messages(event, vk_api, answer):
     vk_api.messages.send(
         user_id=event.user_id,
         message=answer,
-        random_id=random.randint(1,1000)
+        random_id=random.randint(1, 1000)
     )
 
 

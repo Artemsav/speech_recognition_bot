@@ -16,10 +16,10 @@ To run vk bot:
 python vk.py
 ```
 
-Example of telegram bot:
+Example of telegram bot (or you can find it here: @games_of_verbs_bot):
 ![Example](./images/demo_tg_bot.gif)
 
-Example of vk bot:
+Example of vk bot (or you can find it here: [vk bot of club - SZone-Online клан ГОРН](https://vk.com/club56009176), pick messages there):
 
 ![Example](./images/demo_vk_bot.gif)
 

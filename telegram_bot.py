@@ -59,7 +59,7 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
 def create_intent():
     load_dotenv()
     project_id = os.getenv('PROJECT_ID')
-    """Create an intent of the given intent type."""
+    """Create an intent of the given intent type"""
     with open('questions.json', 'r', encoding='UTF-8') as file:
         questions = json.load(file)
     for question in questions:
