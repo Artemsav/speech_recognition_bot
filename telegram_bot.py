@@ -4,14 +4,22 @@ import os
 
 from dotenv import load_dotenv
 from requests.models import ReadTimeoutError
-from telegram import Update, ForceReply
+from telegram import Update, ForceReply, Bot
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from google.cloud import dialogflow
 
 
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
-)
+class TelegramLogsHandler(logging.Handler):
+
+    def __init__(self, tg_bot, chat_id):
+        super().__init__()
+        self.chat_id = chat_id
+        self.tg_bot = tg_bot
+
+    def emit(self, record):
+        log_entry = self.format(record)
+        self.tg_bot.send_message(chat_id=self.chat_id, text=log_entry) 
+
 
 logger = logging.getLogger(__name__)
 
@@ -116,6 +124,15 @@ def handle_messages(update: Update, context: CallbackContext) -> None:
 def main():
     load_dotenv()
     token = os.getenv('TOKEN_TELEGRAM')
+    user_id = os.getenv('USER_ID')
+    logging_token = os.getenv('TOKEN_LOGGING')
+    logging_bot = Bot(token=logging_token)
+    logging.basicConfig(
+            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+            )
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(TelegramLogsHandler(tg_bot=logging_bot, chat_id=user_id))
+    logger.info('Бот запущен')
     """Start the bot."""
     updater = Updater(token)
     dispatcher = updater.dispatcher
