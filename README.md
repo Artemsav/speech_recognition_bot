@@ -2,7 +2,7 @@
 
 ## Project description
 
-This is an assistant bot for telegram and VK, it will close all typical user questions, but something more complicated - redirect to operators. The bot was trained by the Google Dialogflow neural network
+This is an assistant bot for telegram and VK, it will close all typical user questions, but something more complicated - redirect to operators. The bot was trained by the Google Dialogflow neural network. [Dialogflow](https://dialogflow.com/) is a service that allows you to create chatbots for different platforms and languages on different devices.
 
 To run telegram_bot:
 
