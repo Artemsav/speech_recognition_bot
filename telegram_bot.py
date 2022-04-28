@@ -106,7 +106,7 @@ def help_command(update: Update, context: CallbackContext) -> None:
 
 
 def handle_messages(update: Update, context: CallbackContext) -> None:
-    """Handle the answer message from dialogflow the user message."""
+    """Handle the answer message from dialogflow on the user message."""
     load_dotenv()
     project_id = os.getenv('PROJECT_ID')
     user_id = os.getenv('USER_ID')
