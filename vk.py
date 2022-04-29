@@ -25,9 +25,9 @@ def main():
     load_dotenv()
     token = os.getenv('VK_KEY')
     rus_language = 'ru'
-    project_id = os.getenv('PROJECT_ID')
-    user_id = os.getenv('USER_ID')
-    logging_token = os.getenv('TOKEN_LOGGING')
+    project_id = os.getenv('DIALOGFLOW_PROJECT_ID')
+    user_id = os.getenv('TG_USER_ID')
+    logging_token = os.getenv('TG_TOKEN_LOGGING')
     logging_bot = Bot(token=logging_token)
     logging.basicConfig(
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'

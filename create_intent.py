@@ -7,7 +7,7 @@ from google.cloud import dialogflow
 
 def create_intent():
     load_dotenv()
-    project_id = os.getenv('PROJECT_ID')
+    project_id = os.getenv('DIALOGFLOW_PROJECT_ID')
     """Create an intent of the given intent type"""
     with open('questions.json', 'r', encoding='UTF-8') as file:
         questions = json.load(file)

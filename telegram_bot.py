@@ -28,7 +28,7 @@ def help_command(update: Update, context: CallbackContext) -> None:
 def handle_messages(update: Update, context: CallbackContext) -> None:
     """Handle the answer message from dialogflow on the user message."""
     load_dotenv()
-    project_id = os.getenv('PROJECT_ID')
+    project_id = os.getenv('DIALOGFLOW_PROJECT_ID')
     user_id = os.getenv('USER_ID')
     rus_language = 'ru'
     message = [update.message.text]
@@ -44,8 +44,8 @@ def handle_messages(update: Update, context: CallbackContext) -> None:
 def main():
     load_dotenv()
     token = os.getenv('TOKEN_TELEGRAM')
-    user_id = os.getenv('USER_ID')
-    logging_token = os.getenv('TOKEN_LOGGING')
+    user_id = os.getenv('TG_USER_ID')
+    logging_token = os.getenv('TG_TOKEN_LOGGING')
     logging_bot = Bot(token=logging_token)
     logging.basicConfig(
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
