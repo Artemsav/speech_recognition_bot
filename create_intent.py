@@ -36,8 +36,6 @@ def create_intent():
             request={"parent": parent, "intent": intent}
         )
 
-        print("Intent created: {}".format(response))
-
 
 if __name__ == '__main__':
     create_intent()
