@@ -44,7 +44,7 @@ def main():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                 answer = detect_intent_texts(
                     project_id=project_id,
-                    session_id=user_id,
+                    session_id=event.user_id,
                     texts=[event.text],
                     language_code=rus_language
                     )

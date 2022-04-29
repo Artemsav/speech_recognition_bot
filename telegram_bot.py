@@ -29,7 +29,7 @@ def handle_messages(update: Update, context: CallbackContext) -> None:
     """Handle the answer message from dialogflow on the user message."""
     load_dotenv()
     project_id = os.getenv('DIALOGFLOW_PROJECT_ID')
-    user_id = os.getenv('USER_ID')
+    user_id = os.getenv('TG_USER_ID')
     rus_language = 'ru'
     message = [update.message.text]
     answer = detect_intent_texts(
@@ -38,7 +38,8 @@ def handle_messages(update: Update, context: CallbackContext) -> None:
         texts=message,
         language_code=rus_language
     )
-    update.message.reply_text(answer)
+    if answer:
+        update.message.reply_text(answer)
 
 
 def main():
