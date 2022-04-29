@@ -3,6 +3,42 @@
 ## Project description
 
 This is an assistant bot for telegram and VK, it will close all typical user questions, but something more complicated - redirect to operators. The bot was trained by the Google Dialogflow neural network. [Dialogflow](https://dialogflow.com/) is a service that allows you to create chatbots for different platforms and languages on different devices.
+At first place after registration and you will get all necessary tokens, see describtion in section instalation, it needs to teach the Dialogflow via special teaching phases. You shall gather them and put in json file ```questions.json```. It looks like:
+
+```json
+{
+    "Apply to job": {
+        "questions": [
+            "How to get a job with you?",
+            "How do you work?",
+            "I want to work for you"
+            "Is it possible to get a job with you?",
+            "Can I work for you?"
+            "I want to work as an editor for you"
+        ],
+        "answer": "If you'd like to join us, email game-of-verbs@gmail.com with a mini-essay about yourself and attach your portfolio."
+    },
+    "Forgot password": {
+        "questions": [
+            "I do not remember the password",
+            "I can not enter",
+            "Login Problems"
+            "Forgot password",
+            "I forgot my login"
+            "Restore password",
+            "How to recover password",
+            "Incorrect login or password",
+            "Login failed",
+            "Can't sign in"
+        ],
+        "answer": "If you can't log in, use the Forgot your password? under the login form. You will receive an email with further instructions. Check the Spam folder, sometimes letters end up in it."
+    }...
+}
+```
+and run prepared for this script:
+```bash
+python create_intent.py
+```
 
 To run telegram_bot:
 
