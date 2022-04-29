@@ -72,18 +72,20 @@ There is enviroment variables using in the application, you will need tp create 
 ```python
 # example of environment variables defined inside a .env file
 TOKEN_TELEGRAM=1253123421:FFA1DSGOh_dfQACXYT5IiQwEBP5CwJozyP8
-USER_ID=612578269
-PROJECT_ID=my-bot-1529
+TG_TOKEN_LOGGING = 9817234321:SSA1DSGOh_dfQACXYT5IiQwEBP5CwCagaV7
+TG_USER_ID=612578269
+DIALOGFLOW_PROJECT_ID=my-bot-1529
 GOOGLE_APPLICATION_CREDENTIALS=my-bot-1529-2cfc3fe2cb11.json
 VK_KEY=eLbyo6isRjMrRssdsdsdddsaaafsaad
 ```
 
-TOKEN_DEVMAN - you will get it via [Devman API](https://dvmn.org/api/docs/)  
-
 TOKEN_TELEGRAM - to get it please writte to Telegram @BotFather bot, first you shall ```/start``` command, than ```/newbot```, than follow the instruction in Telegram.  
-USER_ID - to get it please writte to Telegram @userinfobot. Send ```/start``` command to the bot.
 
-PROJECT_ID - to get it sign in here and follow [the guid](https://cloud.google.com/dialogflow/docs/quick/setup)
+TG_TOKEN_LOGGING - to get it please writte to Telegram @BotFather bot, first you shall ```/start``` command, than ```/newbot```, than follow the instruction in Telegram. 
+
+TG_USER_ID - to get it please writte to Telegram @userinfobot. Send ```/start``` command to the bot.
+
+DIALOGFLOW_PROJECT_ID - to get it sign in here and follow [the guid](https://cloud.google.com/dialogflow/docs/quick/setup)
 
 GOOGLE_APPLICATION_CREDENTIALS - follow [the guid](https://cloud.google.com/dialogflow/docs/quick/setup)
 
