@@ -20,11 +20,6 @@ def start(update: Update, context: CallbackContext) -> None:
     )
 
 
-def help_command(update: Update, context: CallbackContext) -> None:
-    """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
-
-
 def handle_messages(update: Update, context: CallbackContext) -> None:
     """Handle the answer message from dialogflow on the user message."""
     load_dotenv()
