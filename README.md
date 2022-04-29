@@ -43,10 +43,14 @@ VK_KEY=eLbyo6isRjMrRssdsdsdddsaaafsaad
 ```
 
 TOKEN_DEVMAN - you will get it via [Devman API](https://dvmn.org/api/docs/)  
+
 TOKEN_TELEGRAM - to get it please writte to Telegram @BotFather bot, first you shall ```/start``` command, than ```/newbot```, than follow the instruction in Telegram.  
 USER_ID - to get it please writte to Telegram @userinfobot. Send ```/start``` command to the bot.
+
 PROJECT_ID - to get it sign in here and follow [the guid](https://cloud.google.com/dialogflow/docs/quick/setup)
+
 GOOGLE_APPLICATION_CREDENTIALS - follow [the guid](https://cloud.google.com/dialogflow/docs/quick/setup)
+
 VK_KEY - in the menu "Work with API" in the group management menu in VK
 
 ## Project Goals
