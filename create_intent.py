@@ -11,10 +11,10 @@ def create_intent():
     """Create an intent of the given intent type"""
     with open('questions.json', 'r', encoding='UTF-8') as file:
         questions = json.load(file)
-    for question in questions:
-        display_name = question
-        training_phrases_parts = questions[question]['questions']
-        message_texts = [questions[question]['answer']]
+    for topic, question in questions.items():
+        display_name = topic
+        training_phrases_parts = question.get('questions')
+        message_texts = [question.get('answer')]
         intents_client = dialogflow.IntentsClient()
 
         parent = dialogflow.AgentsClient.agent_path(project_id)
