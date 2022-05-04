@@ -42,13 +42,13 @@ def main():
     for event in longpoll.listen():
         try:
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-                answer = detect_intent_texts(
+                is_fallback, answer = detect_intent_texts(
                     project_id=project_id,
                     session_id=event.user_id,
                     texts=[event.text],
                     language_code=rus_language
-                    ).get('vk')
-                if answer:
+                    )
+                if not is_fallback:
                     handle_messages(event, vk_api, answer=answer)
         except ConnectionError as exc:
             logger.error(exc)

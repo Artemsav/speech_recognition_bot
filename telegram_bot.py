@@ -27,12 +27,12 @@ def handle_messages(update: Update, context: CallbackContext) -> None:
     user_id = os.getenv('TG_USER_ID')
     rus_language = 'ru'
     message = [update.message.text]
-    answer = detect_intent_texts(
+    is_fallback, answer = detect_intent_texts(
         project_id=project_id,
         session_id=user_id,
         texts=message,
         language_code=rus_language
-    ).get('telegram')
+    )
     update.message.reply_text(answer)
 
 
