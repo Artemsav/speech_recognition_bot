@@ -32,9 +32,8 @@ def handle_messages(update: Update, context: CallbackContext) -> None:
         session_id=user_id,
         texts=message,
         language_code=rus_language
-    )
-    if answer:
-        update.message.reply_text(answer)
+    ).get('telegram')
+    update.message.reply_text(answer)
 
 
 def main():
@@ -53,7 +52,6 @@ def main():
     updater = Updater(token)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(CommandHandler("help", help_command))
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_messages))
     updater.start_polling()
     updater.idle()

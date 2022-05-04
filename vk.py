@@ -47,7 +47,7 @@ def main():
                     session_id=event.user_id,
                     texts=[event.text],
                     language_code=rus_language
-                    )
+                    ).get('vk')
                 if answer:
                     handle_messages(event, vk_api, answer=answer)
         except ConnectionError as exc:

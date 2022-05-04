@@ -20,5 +20,11 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
             request={"session": session, "query_input": query_input}
         )
         if response.query_result.intent.is_fallback:
-            return None
-        return response.query_result.fulfillment_text
+            return {
+                'telegram': response.query_result.fulfillment_text,
+                'vk': None
+                }
+        return {
+                'telegram': response.query_result.fulfillment_text,
+                'vk': response.query_result.fulfillment_text,
+                }
