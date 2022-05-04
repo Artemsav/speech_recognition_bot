@@ -35,7 +35,9 @@ At first place after registration and you will get all necessary tokens, see des
     }...
 }
 ```
+
 and run prepared for this script:
+
 ```bash
 python create_intent.py
 ```
@@ -81,7 +83,7 @@ VK_KEY=eLbyo6isRjMrRssdsdsdddsaaafsaad
 
 TOKEN_TELEGRAM - to get it please writte to Telegram @BotFather bot, first you shall ```/start``` command, than ```/newbot```, than follow the instruction in Telegram.  
 
-TG_TOKEN_LOGGING - to get it please writte to Telegram @BotFather bot, first you shall ```/start``` command, than ```/newbot```, than follow the instruction in Telegram. 
+TG_TOKEN_LOGGING - to get it please writte to Telegram @BotFather bot, first you shall ```/start``` command, than ```/newbot```, than follow the instruction in Telegram.
 
 TG_USER_ID - to get it please writte to Telegram @userinfobot. Send ```/start``` command to the bot.
 
